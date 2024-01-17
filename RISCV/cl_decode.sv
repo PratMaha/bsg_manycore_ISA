@@ -11,8 +11,7 @@
  *
  */
 
-`include "bsg_vanilla_defines.vh"
-`include "bsg_riscv_defines.vh"
+`include "bsg_riscv_defines.svh"
 
 module cl_decode
 import bsg_vanilla_pkg::*;
@@ -473,6 +472,11 @@ always_comb begin
       fp_decode_o.fpu_int_op = eFEQ;
     end
   endcase
+end
+
+// Invert the op code bits to make them match the Vanilla/Manycore Instruction set
+always_comb begin
+  instruction_i.op = ~instruction_i.op;
 end
 
 // Unsupported ops:

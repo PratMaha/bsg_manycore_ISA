@@ -1,15 +1,15 @@
-`ifndef BSG_RISCV_DEFINES_VH
-`define BSG_RISCV_DEFINES_VH
+`ifndef BSG_RISCV_DEFINES_SVH
+`define BSG_RISCV_DEFINES_SVH
 
 /**
- *  bsg_riscv_defines.vh
+ *  bsg_riscv_defines.svh
  *  
  *  This file defines the macros
  *  used for riscv operations throughout the vanilla core.
  *
  */
 
-`include "bsg_vanilla_defines.vh"
+`include "bsg_vanilla_defines.svh"
 
 `define RV32_MSTATUS_MIE_BIT_IDX  3
 `define RV32_MSTATUS_MPIE_BIT_IDX 7
