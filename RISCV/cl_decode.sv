@@ -20,6 +20,7 @@ import bsg_manycore_pkg::*;
   input instruction_s instruction_i
   , output decode_s decode_o
   , output fp_decode_s fp_decode_o
+  , output instruction_s instruction_o
 );
 
 
@@ -476,7 +477,12 @@ end
 
 // Invert the op code bits to make them match the Vanilla/Manycore Instruction set
 always_comb begin
-  instruction_i.op = ~instruction_i.op;
+  instruction_o.op <= ~instruction_i.op;
+  instruction_o.funct7 <= instruction_i.funct7;
+  instruction_o.rs2 <= instruction_i.rs2;
+  instruction_o.rs1 <= instruction_i.rs1;
+  instruction_o.funct3 <= instruction_i.funct3; 
+  instruction_o.rd <= instruction_i.rd; 
 end
 
 // Unsupported ops:
