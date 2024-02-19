@@ -207,12 +207,12 @@ module vanilla_core_profiler
   wire amoadd_inc = exe_r.decode.is_amo_op & (exe_r.decode.amo_type == e_vanilla_amoadd);
 
   // branch & jump
-  wire beq_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BEQ);
-  wire bne_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BNE);
-  wire blt_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BLT);
-  wire bge_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BGE);
-  wire bltu_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BLTU);
-  wire bgeu_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `RV32_BGEU);
+  wire beq_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BEQ);
+  wire bne_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BNE);
+  wire blt_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BLT);
+  wire bge_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BGE);
+  wire bltu_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BLTU);
+  wire bgeu_inc = exe_r.decode.is_branch_op & (exe_r.instruction ==? `MANYCORE_BGEU);
 
   wire jal_inc = exe_r.decode.is_jal_op;
   wire jalr_inc = exe_r.decode.is_jalr_op;
@@ -227,29 +227,29 @@ module vanilla_core_profiler
   wire jalr_miss_inc = jalr_inc & jalr_mispredict;
 
   // ALU
-  wire sll_inc = (exe_r.instruction ==? `RV32_SLL);
-  wire slli_inc = (exe_r.instruction ==? `RV32_SLLI);
-  wire srl_inc = (exe_r.instruction ==? `RV32_SRL);
-  wire srli_inc = (exe_r.instruction ==? `RV32_SRLI);
-  wire sra_inc = (exe_r.instruction ==? `RV32_SRA);
-  wire srai_inc = (exe_r.instruction ==? `RV32_SRAI);
+  wire sll_inc = (exe_r.instruction ==? `MANYCORE_SLL);
+  wire slli_inc = (exe_r.instruction ==? `MANYCORE_SLLI);
+  wire srl_inc = (exe_r.instruction ==? `MANYCORE_SRL);
+  wire srli_inc = (exe_r.instruction ==? `MANYCORE_SRLI);
+  wire sra_inc = (exe_r.instruction ==? `MANYCORE_SRA);
+  wire srai_inc = (exe_r.instruction ==? `MANYCORE_SRAI);
 
-  wire add_inc = (exe_r.instruction ==? `RV32_ADD);
-  wire addi_inc = (exe_r.instruction ==? `RV32_ADDI);
-  wire sub_inc = (exe_r.instruction ==? `RV32_SUB);
-  wire lui_inc = (exe_r.instruction ==? `RV32_LUI);
-  wire auipc_inc = (exe_r.instruction ==? `RV32_AUIPC);
-  wire xor_inc = (exe_r.instruction ==? `RV32_XOR);
-  wire xori_inc = (exe_r.instruction ==? `RV32_XORI);
-  wire or_inc = (exe_r.instruction ==? `RV32_OR);
-  wire ori_inc = (exe_r.instruction ==? `RV32_ORI);
-  wire and_inc = (exe_r.instruction ==? `RV32_AND);
-  wire andi_inc = (exe_r.instruction ==? `RV32_ANDI);
+  wire add_inc = (exe_r.instruction ==? `MANYCORE_ADD);
+  wire addi_inc = (exe_r.instruction ==? `MANYCORE_ADDI);
+  wire sub_inc = (exe_r.instruction ==? `MANYCORE_SUB);
+  wire lui_inc = (exe_r.instruction ==? `MANYCORE_LUI);
+  wire auipc_inc = (exe_r.instruction ==? `MANYCORE_AUIPC);
+  wire xor_inc = (exe_r.instruction ==? `MANYCORE_XOR);
+  wire xori_inc = (exe_r.instruction ==? `MANYCORE_XORI);
+  wire or_inc = (exe_r.instruction ==? `MANYCORE_OR);
+  wire ori_inc = (exe_r.instruction ==? `MANYCORE_ORI);
+  wire and_inc = (exe_r.instruction ==? `MANYCORE_AND);
+  wire andi_inc = (exe_r.instruction ==? `MANYCORE_ANDI);
 
-  wire slt_inc = (exe_r.instruction ==? `RV32_SLT);
-  wire slti_inc = (exe_r.instruction ==? `RV32_SLTI);
-  wire sltu_inc = (exe_r.instruction ==? `RV32_SLTU);
-  wire sltiu_inc = (exe_r.instruction ==? `RV32_SLTIU);
+  wire slt_inc = (exe_r.instruction ==? `MANYCORE_SLT);
+  wire slti_inc = (exe_r.instruction ==? `MANYCORE_SLTI);
+  wire sltu_inc = (exe_r.instruction ==? `MANYCORE_SLTU);
+  wire sltiu_inc = (exe_r.instruction ==? `MANYCORE_SLTIU);
  
   // IDIV
   wire div_inc = exe_r.decode.is_idiv_op & (exe_r.decode.idiv_op == eDIV);
@@ -264,16 +264,16 @@ module vanilla_core_profiler
   wire fence_inc = exe_r.decode.is_fence_op;
 
   // CSR
-  wire csrrw_inc = (exe_r.instruction ==? `RV32_CSRRW);
-  wire csrrs_inc = (exe_r.instruction ==? `RV32_CSRRS);
-  wire csrrc_inc = (exe_r.instruction ==? `RV32_CSRRC);
-  wire csrrwi_inc = (exe_r.instruction ==? `RV32_CSRRWI);
-  wire csrrsi_inc = (exe_r.instruction ==? `RV32_CSRRSI);
-  wire csrrci_inc = (exe_r.instruction ==? `RV32_CSRRCI);
+  wire csrrw_inc = (exe_r.instruction ==? `MANYCORE_CSRRW);
+  wire csrrs_inc = (exe_r.instruction ==? `MANYCORE_CSRRS);
+  wire csrrc_inc = (exe_r.instruction ==? `MANYCORE_CSRRC);
+  wire csrrwi_inc = (exe_r.instruction ==? `MANYCORE_CSRRWI);
+  wire csrrsi_inc = (exe_r.instruction ==? `MANYCORE_CSRRSI);
+  wire csrrci_inc = (exe_r.instruction ==? `MANYCORE_CSRRCI);
 
   // Barrier Instruction
-  wire barsend_inc = (exe_r.instruction ==? `RV32_FENCE_OP) & (exe_r.instruction[31:28] == `RV32_BARSEND_FM);
-  wire barrecv_inc = (exe_r.instruction ==? `RV32_FENCE_OP) & (exe_r.instruction[31:28] == `RV32_BARRECV_FM);
+  wire barsend_inc = (exe_r.instruction ==? `MANYCORE_FENCE_OP) & (exe_r.instruction[31:28] == `RV32_BARSEND_FM);
+  wire barrecv_inc = (exe_r.instruction ==? `MANYCORE_FENCE_OP) & (exe_r.instruction[31:28] == `RV32_BARRECV_FM);
 
   // Track bubbles in the EXE stage
   // and their associated PC
